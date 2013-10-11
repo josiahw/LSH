@@ -18,7 +18,7 @@ private:
     unsigned int totalHashes;
     unsigned int totalBits;
     unsigned int functionBits;
-    std::vector<std::vector<uint64_t>> hashes;
+    std::vector<std::vector<size_t>> hashes;
     std::vector<arma::rowvec> originalData;
     arma::rowvec means;
     std::vector<std::unordered_map<uint64_t,size_t>> hashMaps;
@@ -67,7 +67,9 @@ public:
 
         hashes.clear();
         std::vector<uint8_t> used(allData.n_cols,0);
+
         for (size_t i = 0; i < this->totalHashes; ++i) {
+
             std::vector<size_t> hashN;
             while (hashN.size() < this->totalBits) {
                 double distSum = variances[0];
@@ -88,7 +90,7 @@ public:
             for(auto j : hashN) {
                 used[j] = 1;
             }
-            hashes.push_back(hashN);
+            hashes.push_back(std::move(hashN));
         }
 
         //calculate the candidates to mean-split when we hash.
@@ -166,6 +168,16 @@ public:
     }
 
     void loadDataSet(const arma::mat& allData) { //load the dataset as a whole, this should be the default
+
+        const size_t numBuckets = 65535;
+
+        for (auto& map : hashMaps) {
+            // Disable the load factor check on the hash tables
+            map.max_load_factor(std::numeric_limits<float>::max());
+            // Set the number of buckets
+            map.rehash(numBuckets);
+        }
+
         //XXX: this should really only be called on instantiation
         buildHashes(allData);
         originalData.reserve(allData.n_rows);
