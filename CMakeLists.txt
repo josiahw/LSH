@@ -65,6 +65,7 @@ target_link_libraries(UnitTests
                     meantransformer
                     pcatransformer
                     thresholdtransformer
+                    sparsesignconsistenthashfunction
                     ${ARMADILLO_LIBRARIES})
 
 target_link_libraries(ThesisCh2Tests
@@ -86,4 +87,5 @@ target_link_libraries(ThesisCh2Tests
                     meantransformer
                     pcatransformer
                     thresholdtransformer
+                    sparsesignconsistenthashfunction
                     ${ARMADILLO_LIBRARIES})

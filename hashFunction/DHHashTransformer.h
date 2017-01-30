@@ -34,24 +34,24 @@ class DHHashTransformer {
             }
 
             //get the random variables needed for hadamard hashing
-            G.randn(size/2);
+            G.randn(size);
             D.randn(size);
             D = 2.*arma::conv_to<arma::vec>::from(D > 0.) - 1.;
             M = arma::linspace<arma::uvec>(0,size-1,size);
             M = arma::shuffle(M);
-            M = M.rows(0,size/2-1);
+            //M = M.rows(0,size/2-1); //this is for high-dimensional data, since dhhash is quite memory intensive
         }
 
         arma::umat transform(const arma::mat& d) {
-            return HadamardRecursive<arma::mat>(G,
+            return (HadamardRecursive<arma::mat>(G,
                                     HadamardRecursive<arma::mat>(D,d,means).cols(M)
-                                    ) > 0;
+                                    ) > 0).t();
         }
 
         arma::umat transform(const arma::Mat<float>& d) {
-            return HadamardRecursive<arma::Mat<float>>(G,
+            return (HadamardRecursive<arma::Mat<float>>(G,
                                     HadamardRecursive<arma::Mat<float>>(D,d,means).cols(M)
-                                    ) > 0;
+                                    ) > 0).t();
         }
 };
 

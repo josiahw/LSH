@@ -45,16 +45,8 @@ class DoubleHadamardHashFunction {
 		}
 
         const arma::uvec getHash(const arma::umat& d) const {
-			return (d.rows(subsample).t() * singleMul);
+			return (singleMul.t() * d.rows(subsample)).t();
 		}
-
-        const arma::uvec getHash(const arma::mat& d) const {
-            return (arma::conv_to<arma::umat>::from(d.rows(subsample)).t() * singleMul);
-        }
-
-        const arma::uvec getHash(const arma::Mat<float>& d) const {
-            return (arma::conv_to<arma::umat>::from(d.rows(subsample)).t() * singleMul);
-        }
 };
 
 #endif
