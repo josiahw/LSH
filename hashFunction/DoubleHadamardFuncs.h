@@ -55,7 +55,10 @@ MAT HadamardRecursive(const arma::vec& P, const MAT& x, const arma::rowvec& mean
 
 template <class MAT = arma::mat>
 MAT HadamardRecursive(const arma::vec& P, const MAT& x) {
-    MAT r1 = x.t();
+    MAT r1 = x;
+    if (r1.n_cols != P.n_rows) {
+        r1.resize(r1.n_rows,P.n_rows);
+    }
     MAT r2(r1.n_rows,P.n_rows);
     for (int i = P.n_rows/2; i > 1; i /= 2) {
         #pragma omp parallel for

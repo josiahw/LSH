@@ -20,6 +20,7 @@ add_library(randomsubsamplinghashfunction RandomSubSamplingHashFunction.cpp Rand
 add_library(shiftinvariantkernelhashfunction ShiftInvariantKernelHashFunction.cpp ShiftInvariantKernelHashFunction.h)
 add_library(dhhashfunction DHHashFunction.cpp DHHashFunction.h)
 add_library(randomrotationhashfunction RandomRotationHashFunction.cpp RandomRotationHashFunction.h)
+add_library(sparsesignconsistenthashfunction SparseSignConsistentHashFunction.cpp SparseSignConsistentHashFunction.h)
 
 target_link_libraries(randomprojectionhashfunction
                     ${ARMADILLO_LIBRARIES})
@@ -30,4 +31,6 @@ target_link_libraries(shiftinvariantkernelhashfunction
 target_link_libraries(dhhashfunction
                     ${ARMADILLO_LIBRARIES})
 target_link_libraries(randomrotationhashfunction
+                    ${ARMADILLO_LIBRARIES})
+target_link_libraries(sparsesignconsistenthashfunction
                     ${ARMADILLO_LIBRARIES})

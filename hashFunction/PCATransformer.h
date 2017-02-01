@@ -27,7 +27,8 @@ class PCATransformer {
 
         PCATransformer(void) {};
 
-        PCATransformer(const arma::mat& data, const uint64_t& numDims) {
+        PCATransformer(const arma::mat& data,
+                       const uint64_t& numDims) {
 
             means = arma::mean(data,0);
             auto d = data;

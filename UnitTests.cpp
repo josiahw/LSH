@@ -16,6 +16,7 @@
 #include "ShiftInvariantKernelHashFunction.h"
 #include "DHHashFunction.h"
 #include "RandomRotationHashFunction.h"
+#include "SparseSignConsistentHashFunction.h"
 
 //data transformers
 #include "NullTransformer.h"
@@ -552,6 +553,67 @@ int main (void) {
 											arma::mat>,
 						   DHHashTransformer,
 						   DoubleHadamardHashFunction,
+						   ResizeableHashIndex,
+						   arma::mat
+				   			>::TestLSHAccuracy(data,
+				   					 dataqueries,
+				   					 arma::Mat<uint32_t>(), //groundtruth not used for random
+				   					 datadim,
+				   					 datasize,
+				   					 querysize,
+				   					 hashFuncs,
+				   					 hashBits,
+				   					 hashFuncs, //candidate hash functs not used for random
+				   					 maxSearchThreshold,
+				   					 maxQuerySize,
+									 maxRetrievalThreshold,
+				   					 minRetrievalThreshold,
+				   					 knn
+				   					);
+	std::cout << "Hash functions constructed " << std::get<0>(results) << std::endl;
+	std::cout << "Hash Database built in " << std::get<1>(results) << " seconds." << std::endl;
+	std::cout << "whole database searched in " << std::get<2>(results) << std::endl;
+	std::cout << "Mean recall: " << arma::mean(arma::max(results2.first.t(),1));
+	std::cout << "Mean Query Size: " << arma::mean(arma::conv_to<arma::mat>::from(arma::index_max(results2.first.t(),1))) / 20 * maxQuerySize;*/
+
+	std::cout << "Testing Sparse Sign Consistent Hashing with Robin Hood Hash Index" << std::endl;
+	results = TestLSH<RandomConstructor<MeanTransformer,
+											SparseSignConsistentHashFunction,
+											ResizeableHashIndex,
+											HashCollection<MeanTransformer,
+														   SparseSignConsistentHashFunction,
+														   ResizeableHashIndex,
+														   arma::mat>,
+											arma::mat>,
+						   MeanTransformer,
+						   SparseSignConsistentHashFunction,
+						   ResizeableHashIndex,
+						   arma::mat
+				   			>::TestLSHTimings(data,
+				   					 dataqueries,
+				   					 arma::Mat<uint32_t>(), //groundtruth not used for random
+				   					 datadim,
+				   					 datasize,
+				   					 querysize,
+				   					 hashFuncs,
+				   					 hashBits,
+				   					 hashFuncs, //candidate hash functs not used for random
+				   					 maxSearchThreshold,
+				   					 maxQuerySize,
+									 maxRetrievalThreshold,
+				   					 minRetrievalThreshold,
+				   					 knn
+				   					);
+	results2 = TestLSH<RandomConstructor<MeanTransformer,
+											SparseSignConsistentHashFunction,
+											ResizeableHashIndex,
+											HashCollection<MeanTransformer,
+														   SparseSignConsistentHashFunction,
+														   ResizeableHashIndex,
+														   arma::mat>,
+											arma::mat>,
+						   MeanTransformer,
+						   SparseSignConsistentHashFunction,
 						   ResizeableHashIndex,
 						   arma::mat
 				   			>::TestLSHAccuracy(data,
