@@ -96,7 +96,7 @@ public:
         double t5 = get_wall_time();
 
         //return the timings for all 3 parts
-        return {t1 - t0, t3 - t2, t5 - t4};
+        return std::tuple<double,double,double>(t1 - t0, t3 - t2, t5 - t4);
     }
 
 
