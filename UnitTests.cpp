@@ -574,7 +574,7 @@ int main (void) {
 	std::cout << "Hash Database built in " << std::get<1>(results) << " seconds." << std::endl;
 	std::cout << "whole database searched in " << std::get<2>(results) << std::endl;
 	std::cout << "Mean recall: " << arma::mean(arma::max(results2.first.t(),1));
-	std::cout << "Mean Query Size: " << arma::mean(arma::conv_to<arma::mat>::from(arma::index_max(results2.first.t(),1))) / 20 * maxQuerySize;*/
+	std::cout << "Mean Query Size: " << arma::mean(arma::conv_to<arma::mat>::from(arma::index_max(results2.first.t(),1))) / 20 * maxQuerySize;
 
 	std::cout << "Testing Sparse Sign Consistent Hashing with Robin Hood Hash Index" << std::endl;
 	results = TestLSH<RandomConstructor<MeanTransformer,
