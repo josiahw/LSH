@@ -16,7 +16,6 @@
 #include "RandomProjectionHashFunction.h"
 #include "RandomSubSamplingHashFunction.h"
 #include "ShiftInvariantKernelHashFunction.h"
-#include "DHHashFunction.h"
 #include "RandomRotationHashFunction.h"
 
 //data transformers

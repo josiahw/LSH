@@ -35,7 +35,7 @@ class SparseSignConsistentHashFunction {
             arma::uvec subsample = arma::linspace<arma::uvec>(0,nDims-1,nDims);
             //subsample = subsample.rows(0,nBits-1);
             //XXX: don't know the value of m yet - needs mathing from nDims
-            size_t m = 5;
+            size_t m = size_t(std::sqrt(double(nDims)/double(nBits)));
             while (sumIndices.size() < nBits) {
                 subsample = arma::shuffle(subsample);
                 arma::uvec candidates = subsample.rows(0,m);

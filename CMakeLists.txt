@@ -59,7 +59,6 @@ target_link_libraries(UnitTests
                     stdhashindex
                     randomprojectionhashfunction
                     shiftinvariantkernelhashfunction
-                    dhhashfunction
                     randomrotationhashfunction
                     randomsubsamplinghashfunction
                     meantransformer
@@ -81,7 +80,6 @@ target_link_libraries(ThesisCh2Tests
                     stdhashindex
                     randomprojectionhashfunction
                     shiftinvariantkernelhashfunction
-                    dhhashfunction
                     randomrotationhashfunction
                     randomsubsamplinghashfunction
                     meantransformer
