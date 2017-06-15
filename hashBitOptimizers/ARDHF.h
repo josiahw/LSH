@@ -10,10 +10,38 @@
 #include <set>
 #include <list>
 #include "HashError.h"
+//hash functions
+#include "RandomProjectionHashFunction.h"
+#include "RandomSubSamplingHashFunction.h"
+#include "ShiftInvariantKernelHashFunction.h"
+#include "DHHashFunction.h"
+#include "RandomRotationHashFunction.h"
+#include "SparseSignConsistentHashFunction.h"
 
-template<class DataTransformer, class HashFunction, class HashIndex, class HashCollection, class MAT>
+//data transformers
+#include "NullTransformer.h"
+#include "MeanTransformer.h"
+#include "ThresholdTransformer.h"
+#include "PCATransformer.h"
+#include "DHHashTransformer.h"
+
+//hash indices
+#include "StdHashIndex.h"
+#include "ResizeableHashIndex.h"
+#include "LSHForestHashIndex.h"
+#include "LSHForestHashIndexAsync.h"
+
+//hash collection
+#include "HashCollection.h"
+
+template<class DataTransformer, 
+         class HashFunction, 
+         class HashIndex, 
+         template<typename, typename, typename, typename> class HashCollectionType, 
+         class MAT>
 class ARDHFConstructor {
 private:
+    using HashCollection = HashCollectionType<DataTransformer, HashFunction, HashIndex, MAT>;
     struct SparseMat {
         arma::uvec indices;
         arma::vec values;
