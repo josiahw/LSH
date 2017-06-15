@@ -46,16 +46,8 @@ class RandomSubSamplingHashFunction {
             }
         }
 
-        const uint64_t getHash(const arma::urowvec& d) const {
-            uint64_t r = 0;
-            for (uint64_t i = 0; i < subsample.n_elem; ++i) {
-                r |= d[subsample[i]] << i;
-            }
-            return r;
-        }
-
         const arma::uvec getHash(const arma::umat& d) const {
-            return   (d.rows(subsample).t() * singleMul);
+            return (singleMul.t() * d.rows(subsample)).t();
         }
 };
 

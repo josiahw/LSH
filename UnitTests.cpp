@@ -14,7 +14,6 @@
 #include "RandomProjectionHashFunction.h"
 #include "RandomSubSamplingHashFunction.h"
 #include "ShiftInvariantKernelHashFunction.h"
-#include "DHHashFunction.h"
 #include "RandomRotationHashFunction.h"
 #include "SparseSignConsistentHashFunction.h"
 
@@ -475,12 +474,12 @@ int main (void) {
 
 	std::cout << "Testing Double Hadamard Hashing with Robin Hood Hash Index" << std::endl;
 	results = TestLSH<RandomConstructor<DHHashTransformer,
-											DoubleHadamardHashFunction,
+											RandomSubSamplingHashFunction,
 											ResizeableHashIndex,
 											HashCollection,
 											arma::mat>,
 						   DHHashTransformer,
-						   DoubleHadamardHashFunction,
+						   RandomSubSamplingHashFunction,
 						   ResizeableHashIndex,
 						   arma::mat
 				   			>::TestLSHTimings(data,
@@ -499,12 +498,12 @@ int main (void) {
 				   					 knn
 				   					);
 	results2 = TestLSH<RandomConstructor<DHHashTransformer,
-											DoubleHadamardHashFunction,
+											RandomSubSamplingHashFunction,
 											ResizeableHashIndex,
 											HashCollection,
 											arma::mat>,
 						   DHHashTransformer,
-						   DoubleHadamardHashFunction,
+						   RandomSubSamplingHashFunction,
 						   ResizeableHashIndex,
 						   arma::mat
 				   			>::TestLSHAccuracy(data,
